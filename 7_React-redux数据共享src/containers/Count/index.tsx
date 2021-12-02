@@ -46,6 +46,7 @@ class Count extends Component {
         return (
             <div>
                 <h1>当期求和：{this.props?.count}</h1>
+                <p>下方总人数：{this.props.renshu}</p>
                 <select ref={c=>this.selectNumber = c}>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -62,7 +63,7 @@ class Count extends Component {
 }
 
 
-const mapStateToProps = (state:any) =>({count:state})
+const mapStateToProps = (state:any) =>({count:state.he,renshu:state.rens.length})
 
 const CountContainer:any = connect(
     mapStateToProps,

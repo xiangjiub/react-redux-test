@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {nanoid} from 'nanoid';
-
-export default class Person extends Component {
+import {connect} from 'react-redux'
+import {addPersonAction} from '/@/redux/actions/person'
+class Person extends Component {
     nameNode:any
     ageNode:any
 
@@ -9,7 +10,10 @@ export default class Person extends Component {
         const name = this.nameNode.value
         const age = this.ageNode.value
         const personObject = {id:nanoid(),name,age}
-        console.log(personObject)
+        // console.log(personObject)
+        this.props.jiayiren(personObject)
+        this.ageNode.value = ''
+        this.nameNode.value = ''
     }
 
     render() {
@@ -19,7 +23,21 @@ export default class Person extends Component {
                 <input type="text" ref={c => this.nameNode = c} placeholder="输入名字"/>
                 <input type="text" ref={c => this.ageNode = c} placeholder="输入年龄"/>
                 <button onClick={this.addPerson}>添加人员信息</button>
+                <ul>
+                    {
+                        this.props.yiduiren.map((p:any) =>{
+                            return <li key={p.id}>{p.name}--{p.age}</li>
+                        })
+                    }
+                </ul>
+                
             </div>
         )
     }
 }
+
+
+export default connect(
+    (state:any) => ({yiduiren:state.rens}),
+    {jiayiren:addPersonAction}
+)(Person)

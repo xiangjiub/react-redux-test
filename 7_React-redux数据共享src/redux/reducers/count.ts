@@ -5,7 +5,7 @@ import {INCREMENT,DECREMENT} from '../constant'
 // 之前的状态preState，动作对象action
 const initState = 0
 export default function countReducer(preState=initState,action:any){
-    console.log(preState,action)
+    // console.log(preState,action)
     const {type,data} = action
     switch(type){
         case INCREMENT:
